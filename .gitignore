@@ -1,0 +1,13 @@
+.DS_Store
+node_modules
+/dist
+*.local
+.env.local
+.env.*.local
+npm-debug.log*
+.idea
+.vscode
+*.sw?
+vite.config.js.timestamp-*
+dev-server.*.log
+.fuse_hidden*
