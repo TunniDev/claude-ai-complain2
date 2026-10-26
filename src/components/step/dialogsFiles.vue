@@ -74,7 +74,7 @@ export default {
             });
         },
         async urlFiles(path_name ,file_name){
-            let path = `/api/get/${path_name}?filename=${file_name}`
+            let path = `/api/get/${path_name}?filename=${encodeURIComponent(file_name)}`
             let res = await axios.get(`${path}`, { responseType: 'blob' })
             const ext = (file_name.split('.').pop() || '').toLowerCase()
             const mimeByExt = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', gif: 'image/gif' }

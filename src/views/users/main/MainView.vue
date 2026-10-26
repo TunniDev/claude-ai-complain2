@@ -53,7 +53,7 @@ export default {
             let response            = await axios.get(`${path}`)
 
             if(response){
-                let path = `/api/get/user/UrlFilesBanner?filename=${response.data.data[0].file_name}`
+                let path = `/api/get/user/UrlFilesBanner?filename=${encodeURIComponent(response.data.data[0].file_name)}`
                 let res = await axios.get(`${path}`)
                 this.imageUrl = res.data
             }

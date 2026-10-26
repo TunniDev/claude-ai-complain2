@@ -271,7 +271,7 @@ export default {
       },
 
       async urlFiles(url,file_name){
-        let path = `/api/get/${url}?filename=${file_name}`
+        let path = `/api/get/${url}?filename=${encodeURIComponent(file_name)}`
         let res = await axios.get(`${path}`, { responseType: 'blob' })
         const ext = (file_name.split('.').pop() || '').toLowerCase()
         const mimeByExt = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', gif: 'image/gif' }
@@ -284,7 +284,16 @@ export default {
       this.dialogComplainStep = true
       this.cancelMessageName  = v.cancel_message_id === 3 ? v.cancel_message_other : v.cancel_message_name
       this.cancelContactName  = v.cancel_contact_name
-      this.cancelContactUrl   = v.cancel_contact_url
+      this.cancelContactUrl   = this.safeHttpUrl(v.cancel_contact_url)
+    },
+
+    safeHttpUrl(value){
+      try {
+        const u = new URL(value, window.location.origin)
+        return (u.protocol === 'http:' || u.protocol === 'https:') ? u.href : ''
+      } catch {
+        return ''
+      }
     },
 
     async getComplainDetail(){

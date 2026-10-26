@@ -102,7 +102,7 @@ export default {
       });
     },
     async urlFiles(url,file_name, file_original){
-      let path = `/api/get/user/${url}?filename=${file_name}`
+      let path = `/api/get/user/${url}?filename=${encodeURIComponent(file_name)}`
       let res = await axios.get(`${path}`, { responseType: 'blob' })
       this.url = window.URL.createObjectURL(res.data)
 

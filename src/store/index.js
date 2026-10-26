@@ -58,8 +58,11 @@ export default createStore({
 
     async logout({ commit }) {
       const path = '/api/logout'
-      await axios.post(path)
-      commit('clearAuthUser')
+      try {
+        await axios.post(path)
+      } finally {
+        commit('clearAuthUser')
+      }
     },
 
     checkLogin({ commit }) {

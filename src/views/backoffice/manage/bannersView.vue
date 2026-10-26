@@ -468,7 +468,7 @@
         });
       },
       async urlFiles(url,file_name){
-        let path = `/api/get/${url}?filename=${file_name}`
+        let path = `/api/get/${url}?filename=${encodeURIComponent(file_name)}`
         let res = await axios.get(`${path}`, { responseType: 'blob' })
         this.url = window.URL.createObjectURL(res.data)
         this.overlayImg = !this.overlayImg

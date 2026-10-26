@@ -57,8 +57,7 @@
           this.$router.push("/user/login")
         },
         async fetchResetPassword(){
-          console.log(this.$route.params.token);
-          const response = await axios.get(`/api/user/checkTokenReset/${this.$route.params.token}`);
+          const response = await axios.get(`/api/user/checkTokenReset/${encodeURIComponent(this.$route.params.token)}`);
           if(response.data.status === 401){
             this.$router.push({name : 'NotFound'})
           }else{

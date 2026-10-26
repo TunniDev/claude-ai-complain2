@@ -178,7 +178,11 @@ import store from '../store/index.js';
         }
       },
       async logout() {
-          await this.$store.dispatch("logout");
+          try {
+              await this.$store.dispatch("logout");
+          } catch (error) {
+              console.error("logout", error);
+          }
           if (this.$route.path.includes("cgd")){
               await this.$router.push({name:"cgd_login"});
           }else if (this.$route.path.includes("user")){
